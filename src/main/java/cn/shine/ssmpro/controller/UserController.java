@@ -2,9 +2,11 @@ package cn.shine.ssmpro.controller;
 
 import cn.shine.ssmpro.entity.UserInfo;
 import cn.shine.ssmpro.service.IUserInfoService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController{
     @Autowired
     private IUserInfoService userInfoService;
-    @RequestMapping("/getUserInfo")
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET,produces = {"application/json; charset=utf-8"})
     @ResponseBody
-    public UserInfo getUserInfo(HttpServletRequest request, HttpServletResponse response){
+    public String getUserInfo(HttpServletRequest request, HttpServletResponse response){
         String uid = request.getParameter("uid");
         UserInfo userInfo = userInfoService.getUserInfoById(uid);
-        return userInfo;
+        Object userObj = JSONObject.toJSON(userInfo);
+        System.out.println(userObj.toString());
+        return userObj.toString();
     }
 }

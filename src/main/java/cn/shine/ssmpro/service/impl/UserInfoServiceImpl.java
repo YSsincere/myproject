@@ -1,6 +1,6 @@
 package cn.shine.ssmpro.service.impl;
 
-import cn.shine.ssmpro.dao.IUserInfoDao;
+import cn.shine.ssmpro.dao.UserInfoDao;
 import cn.shine.ssmpro.entity.UserInfo;
 import cn.shine.ssmpro.service.IUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserInfoServiceImpl implements IUserInfoService {
     @Autowired
-    private IUserInfoDao userInfoDao;
+    private UserInfoDao userInfoDao;
 
     @Override
     public UserInfo getUserInfoById(String uid) {
