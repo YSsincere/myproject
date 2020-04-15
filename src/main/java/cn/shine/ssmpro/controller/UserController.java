@@ -23,13 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController{
     @Autowired
     private IUserInfoService userInfoService;
-    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET,produces = {"application/json; charset=utf-8"})
+    @RequestMapping(value = "/getUserInfo")
     @ResponseBody
-    public String getUserInfo(HttpServletRequest request, HttpServletResponse response){
+    public UserInfo getUserInfo(HttpServletRequest request, HttpServletResponse response){
         String uid = request.getParameter("uid");
         UserInfo userInfo = userInfoService.getUserInfoById(uid);
         Object userObj = JSONObject.toJSON(userInfo);
         System.out.println(userObj.toString());
-        return userObj.toString();
+        return userInfo;
     }
 }
